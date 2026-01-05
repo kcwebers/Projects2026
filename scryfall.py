@@ -1,42 +1,44 @@
 import requests
 
-headers = {
-    'user-agent': 'scryfall_data_pull_personal/1.0',
-    'accept': '*/*',
+# headers = {
+#     'user-agent': 'scryfall_data_pull_personal/1.0',
+#     'accept': '*/*',
+# }
+
+#------------------------------------------------------------
+#    Endpoint cards/collection (sample)
+#------------------------------------------------------------
+# url = 'https://api.scryfall.com/cards/collection'
+# params = {
+#     "identifiers": [
+#         {
+#         "id": "683a5707-cddb-494d-9b41-51b4584ded69"
+#         },
+#         {
+#         "name": "Ancient Tomb"
+#         },
+#         {
+#         "set": "mrd",
+#         "collector_number": "150"
+#         }
+#     ]
+# }
+
+# api call
+# NOTE: json for params, POST not GET response
+# response = requests.post(url, json=params)
+# print(response.json())
+
+#------------------------------------------------------------
+#    Endpoint cards/search 
+#------------------------------------------------------------
+
+url = 'https://api.scryfall.com/cards/search'
+
+# NOTE: params need specific spacing w/i strings for key value pairs
+params = {
+    "q" : "set:tla"
 }
 
-params = {"q" : "set:tla"}
-
-response = requests.get('https://api.scryfall.com/cards/search', params=params)
+response = requests.get(url, params=params)
 print(response.json())
-
-
-
-# def get_card_data():
-#     url = 'https://api.scryfall.com/cards/collection'
-
-#     try:
-#         response = requests.get(url)
-
-#         if response.status_code == 200:
-#             card_data = response.json()
-#             print(card_data)
-#             return card_data
-#         else:
-#             print('Error:', response.status_code)
-#             return None
-#     except requests.exceptions.RequestException as e:
-#         print('Error:', e)
-#         return None
-
-# def main():
-#     card_data = get_card_data()
-
-#     if card_data:
-#         print('First Post Title:', card_data[0]['title'])
-#         print('First Post Body:', card_data[0]['body'])
-#     else:
-#         print('Failed to fetch card_data from API.')
-
-# if __name__ == '__main__':
-#     main()
