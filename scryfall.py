@@ -1,4 +1,5 @@
 import requests
+import json
 
 # headers = {
 #     'user-agent': 'scryfall_data_pull_personal/1.0',
@@ -42,3 +43,14 @@ params = {
 
 response = requests.get(url, params=params)
 print(response.json())
+
+
+# pull data from response and dump it into file for use in spreadsheet ^.^
+
+if response.status_code == 200:
+    data = response.json()  # Extract JSON content
+    json_data = json.dumps(data, indent=4)  # Serialize the extracted data
+    print(json_data)
+
+with open("card_data.json", "w") as card_data_json:
+    json.dump(json_data, card_data_json, indent=4)
